@@ -1,0 +1,27 @@
+[user]
+	name = Israel Hsu
+	email = israel.hsu@mongodb.com
+[alias]
+	br = branch
+	brl = branch --list
+	ch = cherry-pick
+	cm = commit
+	co = checkout
+	coiz = "!f() { \
+			if [ \"$1\" = \"-b\" ]; then \
+		  		dashb='-b'; shift; \
+			fi; \
+			git checkout $dashb israelhsu/$1; \
+		}; f"
+	d  = diff
+	dog = log --decorate --oneline --graph
+	dt = difftool
+	pom = pull origin master
+	st = status
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+	trustExitCode = true
+[mergetool]
+	trustExitCode = true
