@@ -2,9 +2,8 @@
 
 Common dotfiles (Linux configuration files) are under a bare git repository in ~/.dotfiles.
 
-To interact with this repository, use the git command:
-$ /usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME <command> <command options>
+To interact with this repository at the command line, use the `dotfiles` command which is
+[aliased](/.aliases) to the `git` command as follows:
+`/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME`.
 
-This incantation is included in the "dotfiles" alias in .aliases.
-
-For more details, read https://www.ackama.com/what-we-think/the-best-way-to-store-your-dotfiles-a-bare-git-repository-explained/
+For more details, read [The best way to store your dotfiles: A bare Git repository \*\*EXPLAINED\*\*](https://www.ackama.com/what-we-think/the-best-way-to-store-your-dotfiles-a-bare-git-repository-explained/).
