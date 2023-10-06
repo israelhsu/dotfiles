@@ -41,15 +41,17 @@ alias gdb='/opt/mongodbtoolchain/gdb/bin/gdb'
 numcolors=$(tput colors)
 if [ -f ~/.aliases ]; then . ~/.aliases; fi
 
+source ~/bin/git-prompt.sh
+
 if [ -n "$numcolors" ] && [ "$numcolors" -ge 8 ]; then
-	PS1='${debian_chroot:+($debian_chroot)}\[\e[1;30m\]$? \[\e[0;32m\]\A\e[m \[\e[0;34m\]\u@\h\[\e[0;33m\]:\w\[\e[1m\e[0;30;43m\]\$\[\e[m\] '
+	PS1="${debian_chroot:+($debian_chroot)}\[\e[1;30m\]$? \[\e[0;32m\]\A\[\e[m\] \[\e[0;34m\]\u@${EXTERNALIP}\[\e[1;33m\]\w\[\e[0;2;33m\]\$(__git_ps1 \"|%s\")\[\e[1m\e[0;30;43m\]\$\[\e[m\] "
 else
-	PS1='${debian_chroot:+($debian_chroot)}$? \A \u@\h:\w\$ '
+	PS1='${debian_chroot:+($debian_chroot)}$? \A \u@${EXTERNALIP}\w$(__git_ps1 "(%s)")\$ '
 fi
 
 # BEGIN pipx config
 # pipx will install binaries to "~/.local/bin"
-export PATH="/opt/undodb5/bin:/opt/cmake/bin:/opt/rtags-2.38/bin:/opt/mongodbtoolchain/gdb/bin:/opt/go/bin:/opt/go/bin:/opt/undodb5/bin:/opt/cmake/bin:/opt/rtags-2.38/bin:/opt/mongodbtoolchain/gdb/bin:/opt/go/bin:/opt/undodb5/bin:/opt/cmake/bin:/opt/rtags-2.38/bin:/opt/mongodbtoolchain/gdb/bin:/opt/go/bin:/opt/undodb5/bin:/opt/cmake/bin:/opt/rtags-2.38/bin:/opt/mongodbtoolchain/gdb/bin:/opt/go/bin:/opt/go/bin:/opt/undodb5/bin:/opt/cmake/bin:/opt/rtags-2.38/bin:/opt/mongodbtoolchain/gdb/bin:/opt/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/opt/node/bin:/opt/node/bin:/home/ubuntu/cli_bin:/opt/node/bin:/opt/node/bin:/opt/node/bin:/opt/node/bin:/home/ubuntu/cli_bin:/opt/node/bin:/home/ubuntu/.local/bin:/home/ubuntu/.local/bin"
+export PATH="/opt/mongodbtoolchain/v4/bin:/opt/undodb5/bin:/opt/cmake/bin:/opt/rtags-2.38/bin:/opt/mongodbtoolchain/gdb/bin:/opt/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/home/ubuntu/.local/bin"
 # END pipx config
 
-export PATH="$PATH:$HOME/bin"
+PATH=$PATH:$HOME/bin

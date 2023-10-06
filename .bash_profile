@@ -23,13 +23,9 @@ ulimit -l 1024
 ulimit -c unlimited
 # END ULIMITS BLOCK WT
 
+export PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
 export PATH="${PATH}:/home/ubuntu/cli_bin"
 
-
-# BEGIN Source .bashrc
-if [[ -f ~/.bashrc ]]; then
-    source ~/.bashrc
-fi
-# END Source .bashrc
-
 export EDITOR="/usr/local/bin/nvim"
+
+export EXTERNALIP=$(/usr/bin/dig +short myip.opendns.com @resolver1.opendns.com)
