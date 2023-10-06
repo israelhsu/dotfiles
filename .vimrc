@@ -15,7 +15,8 @@ Plug 'https://github.com/tpope/vim-fugitive', { 'tag': 'v3.2' }
 
 call plug#end()
 
-set number
+filetype plugin on
+
 set encoding=utf-8
 
 if &rtp =~ 'plugged/vim-clang-format'
@@ -86,9 +87,18 @@ if exists('g:vscode')
 	" END NeoVim Ui Modifier
 endif
 
+""" Display settings
 " Disable wrap to beginning/end of file during search
 set nowrapscan
+set number
 
+""" Editing settings
 set ignorecase
 set smartcase
+
+""" Buffer settings
+" Allow switching buffers without saving
+set hidden
+
+autocmd FileType yml setlocal shiftwidth=2 tabstop=2
 
