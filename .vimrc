@@ -100,5 +100,9 @@ set smartcase
 " Allow switching buffers without saving
 set hidden
 
+""" Search settings
+" Find within a visual region
+vnoremap <leader>f :/\%V
+
 autocmd FileType yml setlocal shiftwidth=2 tabstop=2
 
