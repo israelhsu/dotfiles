@@ -4,6 +4,7 @@
 [alias]
 	br = branch
 	brl = branch --list
+	brn = rev-parse --abbrev-ref HEAD
 	ch = cherry-pick
 	cm = commit
 	co = checkout
@@ -13,11 +14,15 @@
 			fi; \
 			git checkout $dashb israelhsu/$1; \
 		}; f"
-	d  = diff
+	d  = diff --word-diff=color
 	dog = log --decorate --oneline --graph
 	dt = difftool
 	pom = pull origin master
 	st = status
+	wt = worktree
+	wta = worktree add
+	wtl = worktree list
+	wtr = worktree remove
 [diff]
 	tool = vimdiff
 [difftool]
@@ -25,3 +30,9 @@
 	trustExitCode = true
 [mergetool]
 	trustExitCode = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
