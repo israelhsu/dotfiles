@@ -1,3 +1,6 @@
+export PATH="/home/linuxbrew/.linuxbrew/bin:/opt/mongodbtoolchain/v4/bin:/opt/undodb5/bin:/opt/cmake/bin:/opt/rtags-2.38/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
 # BEGIN LC_ALL=C
 export LC_ALL="C"
 # END LC_ALL=C
@@ -34,8 +37,6 @@ export UNDO_user='israel.hsu'
 
 # BEGIN UndoDB Aliases
 alias udb='/opt/undodb5/bin/udb --undodb-gdb-exe /opt/mongodbtoolchain/gdb/bin/gdb'
-#alias gdb='/opt/undodb5/bin/udb --undodb-gdb-exe /opt/mongodbtoolchain/gdb/bin/gdb'
-alias gdb='/opt/mongodbtoolchain/gdb/bin/gdb'
 # END UndoDB Aliases
 
 numcolors=$(tput colors)
@@ -45,13 +46,14 @@ source ~/bin/git-prompt.sh
 
 if [ -n "$numcolors" ] && [ "$numcolors" -ge 8 ]; then
 	PS1="${debian_chroot:+($debian_chroot)}\[\e[1;30m\]$? \[\e[0;32m\]\A\[\e[m\] \[\e[0;34m\]\u@${EXTERNALIP}\[\e[1;33m\]\w\[\e[0;2;33m\]\$(__git_ps1 \"|%s\")\[\e[1m\e[0;30;43m\]\$\[\e[m\] "
+	if [ -x /usr/bin/dircolors ]; then
+		test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+		alias ls='ls --color=auto'
+	fi
 else
 	PS1='${debian_chroot:+($debian_chroot)}$? \A \u@${EXTERNALIP}\w$(__git_ps1 "(%s)")\$ '
 fi
 
 # BEGIN pipx config
 # pipx will install binaries to "~/.local/bin"
-export PATH="/opt/mongodbtoolchain/v4/bin:/opt/undodb5/bin:/opt/cmake/bin:/opt/rtags-2.38/bin:/opt/mongodbtoolchain/gdb/bin:/opt/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/home/ubuntu/.local/bin"
 # END pipx config
-
-PATH=$PATH:$HOME/bin
