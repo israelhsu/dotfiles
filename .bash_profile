@@ -26,6 +26,12 @@ ulimit -c unlimited
 export PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
 export PATH="${PATH}:/home/ubuntu/cli_bin"
 
-export EDITOR="/usr/local/bin/nvim"
+export EDITOR="/home/linuxbrew/.linuxbrew/bin/nvim"
 
 export EXTERNALIP=$(/usr/bin/dig +short myip.opendns.com @resolver1.opendns.com)
+
+# BEGIN Source .bashrc
+if [[ -f ~/.bashrc ]]; then
+    source ~/.bashrc
+fi
+# END Source .bashrc
