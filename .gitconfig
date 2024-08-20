@@ -28,6 +28,8 @@
 [difftool]
 	prompt = false
 	trustExitCode = true
+[gc]
+	pruneExpire = 2.months.ago
 [mergetool]
 	trustExitCode = true
 [credential "https://github.com"]
