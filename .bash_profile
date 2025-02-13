@@ -1,6 +1,3 @@
-# BEGIN ANSIBLE MANAGED BLOCK
-if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
-# END ANSIBLE MANAGED BLOCK
 # BEGIN LC_ALL=C
 export LC_ALL="C"
 # END LC_ALL=C
@@ -22,13 +19,6 @@ ulimit -l 1024
 # BEGIN ULIMITS BLOCK WT
 ulimit -c unlimited
 # END ULIMITS BLOCK WT
-
-export PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
-export PATH="${PATH}:/home/ubuntu/cli_bin"
-
-export EDITOR="/home/linuxbrew/.linuxbrew/bin/nvim"
-
-export EXTERNALIP=$(/usr/bin/dig +short myip.opendns.com @resolver1.opendns.com)
 
 # BEGIN Source .bashrc
 if [[ -f ~/.bashrc ]]; then

@@ -1,5 +1,11 @@
-export PATH="/home/linuxbrew/.linuxbrew/bin:/opt/mongodbtoolchain/v4/bin:/opt/undodb5/bin:/opt/cmake/bin:/opt/rtags-2.38/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
-PATH=$PATH:$HOME/.local/bin:$HOME/bin
+# Distribution bin locations
+export PATH=/usr/locar/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin
+# MongoDB tools
+PATH=/opt/mongodbtoolchain/v4/bin:/opt/undodb5/bin:/opt/rtags-2.38/bin:${PATH}
+# Locally installed
+PATH=/snap/bin:$HOME/.local/bin:${PATH}
+# Personal scripts
+PATH=$HOME/bin:${PATH}
 
 # BEGIN LC_ALL=C
 export LC_ALL="C"
@@ -39,21 +45,39 @@ export UNDO_user='israel.hsu'
 alias udb='/opt/undodb5/bin/udb --undodb-gdb-exe /opt/mongodbtoolchain/gdb/bin/gdb'
 # END UndoDB Aliases
 
-numcolors=$(tput colors)
-if [ -f ~/.aliases ]; then . ~/.aliases; fi
+# Stuff for interactive shells only:
+if [[ $- == *i* ]]; then
+	if [ -f ~/.aliases ]; then . ~/.aliases; fi
 
-source ~/bin/git-prompt.sh
+	export EDITOR="/snap/bin/nvim"
 
-if [ -n "$numcolors" ] && [ "$numcolors" -ge 8 ]; then
-	PS1="${debian_chroot:+($debian_chroot)}\[\e[1;30m\]$? \[\e[0;32m\]\A\[\e[m\] \[\e[0;34m\]\u@${EXTERNALIP}\[\e[1;33m\]\w\[\e[0;2;33m\]\$(__git_ps1 \"|%s\")\[\e[1m\e[0;30;43m\]\$\[\e[m\] "
-	if [ -x /usr/bin/dircolors ]; then
-		test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-		alias ls='ls --color=auto'
+	export HISTCONTROL=ignoreboth
+	export HISTSIZE=-1
+	export HISTFILESIZE=-1
+	shopt -s histappend
+
+	source $HOME/bin/.git-prompt.sh
+
+	numcolors=$(tput colors)
+	if [ -n "$numcolors" ] && [ "$numcolors" -ge 8 ]; then
+		PS1="${debian_chroot:+($debian_chroot)}\[\e[0;2;36m\]$? \[\e[0;2;34m\]\A\[\e[m\] \[\e[0;34m\]\u@${HOSTNAME}\[\e[0;33m\]\w\[\e[0;2;33m\]\$(__git_ps1 \"|%s\")\[\e[1m\e[1;30;43m\]\$\[\e[m\] "
+		if [ -x /usr/bin/dircolors ]; then
+			test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+			alias ls='ls --color=auto'
+		fi
+	else
+		PS1='${debian_chroot:+($debian_chroot)}$? \A \u:\w$(__git_ps1 "(%s)")\$ '
 	fi
-else
-	PS1='${debian_chroot:+($debian_chroot)}$? \A \u@${EXTERNALIP}\w$(__git_ps1 "(%s)")\$ '
+
+	# Disable terminal control flow (CTRL-S and CTRL-Q)
+	stty -ixon -ixoff
 fi
+
 
 # BEGIN pipx config
 # pipx will install binaries to "~/.local/bin"
 # END pipx config
+
+export PATH="${PATH}:/home/ubuntu/cli_bin"
+
+
